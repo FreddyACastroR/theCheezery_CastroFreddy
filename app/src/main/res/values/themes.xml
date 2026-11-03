@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.TheCheezery_252191" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/cheezery_background</item>
+    </style>
+</resources>
