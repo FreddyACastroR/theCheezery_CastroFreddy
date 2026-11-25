@@ -1,6 +1,8 @@
 package mx.itson.thecheezery_252191.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,12 +34,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mx.itson.thecheezery_252191.R
+import mx.itson.thecheezery_252191.data.database.entity.ProductEntity
+import mx.itson.thecheezery_252191.data.images
 import mx.itson.thecheezery_252191.data.salties
-import mx.itson.thecheezery_252191.domain.Product
 import mx.itson.thecheezery_252191.ui.components.BackButton
 import mx.itson.thecheezery_252191.ui.components.ScreenTitle
 import mx.itson.thecheezery_252191.ui.theme.DisabledGrey
 import mx.itson.thecheezery_252191.ui.theme.Less_Purple
+import mx.itson.thecheezery_252191.ui.theme.Pinky
 import mx.itson.thecheezery_252191.ui.theme.PurpleGrey40
 import mx.itson.thecheezery_252191.ui.theme.TheCheezeryTheme
 import mx.itson.thecheezery_252191.ui.theme.Very_purple
@@ -47,7 +51,7 @@ import mx.itson.thecheezery_252191.ui.viewmodel.ProductItem
 fun ProductsScreen(
     title: Int,
     products: List<ProductItem>,
-    onAddClick: (Product) -> Unit,
+    onAddClick: (ProductEntity) -> Unit,
     onBackClick: () -> Unit
 ) {
     Column(
@@ -69,22 +73,40 @@ fun ProductsScreen(
 }
 
 @Composable
-fun ProductRow(item: ProductItem, onAddClick: (Product) -> Unit) {
+fun ProductRow(item: ProductItem, onAddClick: (ProductEntity) -> Unit) {
     val product = item.product
+    val image = images[product.image]
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(product.image),
-            contentDescription = product.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(80.dp)
-                .clip(CircleShape)
-        )
+        if (image != null) {
+            Image(
+                painter = painterResource(image),
+                contentDescription = product.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(80.dp)
+                    .clip(CircleShape)
+            )
+        } else {
+            // los productos agregados por el usuario no tienen imagen, se pone su inicial
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .background(Pinky, CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = product.name.take(1).uppercase(),
+                    fontSize = 36.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
+        }
         Spacer(modifier = Modifier.width(16.dp))
 
         Column(modifier = Modifier.weight(1f)) {

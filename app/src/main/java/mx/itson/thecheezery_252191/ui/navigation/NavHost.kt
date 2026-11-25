@@ -1,6 +1,9 @@
 package mx.itson.thecheezery_252191.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
@@ -14,6 +17,7 @@ import mx.itson.thecheezery_252191.ui.screens.MenuScreen
 import mx.itson.thecheezery_252191.ui.screens.ProductsScreen
 import mx.itson.thecheezery_252191.ui.screens.WelcomeScreen
 import mx.itson.thecheezery_252191.ui.viewmodel.LoginViewModel
+import mx.itson.thecheezery_252191.ui.viewmodel.ProductItem
 import mx.itson.thecheezery_252191.ui.viewmodel.ShopViewModel
 
 private fun puedeNavegar(entry: NavBackStackEntry): Boolean {
@@ -63,9 +67,12 @@ fun CheezeryNavHost() {
         }
         composable<Products> { entry ->
             val category = entry.toRoute<Products>().category
+            // los productos salen de la bd, el remember es para no crear la consulta en cada recomposicion
+            val products by remember(category) { shopViewModel.productsOf(category) }
+                .collectAsState(initial = emptyList())
             ProductsScreen(
                 title = category.title,
-                products = shopViewModel.productsOf(category),
+                products = products.map { ProductItem(it, shopViewModel.isInCart(it)) },
                 onAddClick = { shopViewModel.addToCart(it) },
                 onBackClick = {
                     if (puedeNavegar(entry)) navController.popBackStack()

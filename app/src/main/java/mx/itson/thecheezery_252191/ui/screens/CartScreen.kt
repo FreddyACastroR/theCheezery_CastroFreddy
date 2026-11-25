@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mx.itson.thecheezery_252191.R
 import mx.itson.thecheezery_252191.data.coldDrinks
+import mx.itson.thecheezery_252191.data.database.entity.ProductEntity
 import mx.itson.thecheezery_252191.data.salties
-import mx.itson.thecheezery_252191.domain.Product
 import mx.itson.thecheezery_252191.ui.components.BackButton
 import mx.itson.thecheezery_252191.ui.components.ScreenTitle
 import mx.itson.thecheezery_252191.ui.theme.Less_Purple
@@ -38,9 +38,9 @@ import mx.itson.thecheezery_252191.ui.theme.Very_purple
 
 @Composable
 fun CartScreen(
-    cart: List<Product>,
+    cart: List<ProductEntity>,
     total: Float,
-    onRemoveClick: (Product) -> Unit,
+    onRemoveClick: (ProductEntity) -> Unit,
     onBackClick: () -> Unit
 ) {
     Column(

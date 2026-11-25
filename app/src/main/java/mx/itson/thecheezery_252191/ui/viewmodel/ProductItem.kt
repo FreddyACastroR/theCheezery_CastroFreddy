@@ -1,8 +1,8 @@
 package mx.itson.thecheezery_252191.ui.viewmodel
 
-import mx.itson.thecheezery_252191.domain.Product
+import mx.itson.thecheezery_252191.data.database.entity.ProductEntity
 
 data class ProductItem(
-    val product: Product,
+    val product: ProductEntity,
     val inCart: Boolean
 )
