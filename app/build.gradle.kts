@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     // Genera los serializadores de las rutas de navegación
     alias(libs.plugins.kotlin.serialization)
+    // Para el compilador de Room. No se agrega org.jetbrains.kotlin.android
+    // porque AGP 9 ya trae Kotlin y el build truena si se pone
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -48,6 +51,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     debugImplementation(libs.androidx.compose.ui.tooling)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
