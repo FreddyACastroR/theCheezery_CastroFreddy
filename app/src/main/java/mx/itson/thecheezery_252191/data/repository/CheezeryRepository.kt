@@ -15,8 +15,6 @@ class CheezeryRepository(private val database: AppDatabase) {
     private val comboDao = database.comboDao()
     private val productComboDao = database.productComboDao()
 
-    // productos
-
     // la primera vez la tabla esta vacia y se llena con el menu de la cafeteria
     suspend fun insertDefaultProducts() {
         database.withTransaction {
@@ -43,8 +41,7 @@ class CheezeryRepository(private val database: AppDatabase) {
     }
 
     // combos
-
-    // se guarda el combo y despues sus productos, todo junto en una transaccion
+    // se guarda el combo y despues sus productos
     suspend fun insertComboWithProducts(combo: ComboEntity, productIds: List<Int>) {
         database.withTransaction {
             val idCombo = comboDao.insertCombo(combo).toInt()

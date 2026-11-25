@@ -10,6 +10,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import mx.itson.thecheezery_252191.cheezeryApplication
 import mx.itson.thecheezery_252191.data.database.entity.ProductEntity
@@ -27,7 +30,8 @@ class ShopViewModel(
 
     val total: Float by derivedStateOf { _cart.sumOf { it.price.toDouble() }.toFloat() }
 
-    val combos: Flow<List<ComboWithProducts>> = repository.getCombosWithProducts()
+    val combos: StateFlow<List<ComboWithProducts>> = repository.getCombosWithProducts()
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     init {
         viewModelScope.launch {

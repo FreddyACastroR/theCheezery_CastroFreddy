@@ -10,7 +10,6 @@ import mx.itson.thecheezery_252191.data.database.entity.ProductComboEntity
 @Dao
 interface ProductComboDao {
 
-    // si el producto ya estaba en ese combo se ignora (el indice es unique)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertProductCombo(productCombo: ProductComboEntity): Long
 

@@ -17,3 +17,12 @@ data class Products(val category: Category)
 
 @Serializable
 object Cart
+
+@Serializable
+object Combos
+
+@Serializable
+object AddCombo
+
+@Serializable
+object AddProduct

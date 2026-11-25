@@ -92,7 +92,6 @@ fun ProductRow(item: ProductItem, onAddClick: (ProductEntity) -> Unit) {
                     .clip(CircleShape)
             )
         } else {
-            // los productos agregados por el usuario no tienen imagen, se pone su inicial
             Box(
                 modifier = Modifier
                     .size(80.dp)

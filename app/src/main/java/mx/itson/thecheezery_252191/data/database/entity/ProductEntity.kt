@@ -23,7 +23,6 @@ data class ProductEntity(
     @ColumnInfo(name = "descriptionProduct")
     val description: String? = null,
 
-    // nombre de la categoria: HOT_DRINKS, COLD_DRINKS, SALTIES o SWEETS
     @ColumnInfo(name = "categoryProduct")
     val category: String
 )

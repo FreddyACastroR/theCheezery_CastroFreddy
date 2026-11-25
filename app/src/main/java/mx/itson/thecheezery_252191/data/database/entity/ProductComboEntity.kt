@@ -6,7 +6,6 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-// tabla intermedia: que productos tiene cada combo
 @Entity(
     tableName = "ProductsCombo",
     foreignKeys = [

@@ -18,10 +18,25 @@
     <string name="sweets">Sweets</string>
     <string name="combos">Combos</string>
     <string name="add_new_product">Add new product</string>
-    <string name="coming_soon">Coming soon!</string>
 
     <!-- carrito -->
     <string name="my_order">My Order</string>
     <string name="cart_empty">Add some products to your order!</string>
     <string name="total">Total</string>
+
+    <!-- combos -->
+    <string name="combos_empty">There are no combos yet. Create the first one!</string>
+    <string name="new_combo">New combo</string>
+    <string name="combo_products">Productos del combo</string>
+
+    <!-- nuevo producto -->
+    <string name="new_product">New product</string>
+    <string name="product_saved">Producto guardado</string>
+
+    <!-- formularios -->
+    <string name="form_name">Nombre</string>
+    <string name="form_price">Precio</string>
+    <string name="form_description">Descripción (opcional)</string>
+    <string name="form_category">Categoría</string>
+    <string name="form_save">Guardar</string>
 </resources>

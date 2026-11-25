@@ -1,6 +1,5 @@
 package mx.itson.thecheezery_252191.ui.screens
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,8 +39,12 @@ import mx.itson.thecheezery_252191.ui.theme.TheCheezeryTheme
 import mx.itson.thecheezery_252191.ui.theme.Very_purple
 
 @Composable
-fun MenuScreen(onCategoryClick: (Category) -> Unit, onCartClick: () -> Unit) {
-    val context = LocalContext.current
+fun MenuScreen(
+    onCategoryClick: (Category) -> Unit,
+    onCombosClick: () -> Unit,
+    onAddProductClick: () -> Unit,
+    onCartClick: () -> Unit
+) {
     val degradado = Brush.verticalGradient(listOf(Brighter_Pink, Pinky, Very_purple))
 
     Column(
@@ -87,9 +89,7 @@ fun MenuScreen(onCategoryClick: (Category) -> Unit, onCartClick: () -> Unit) {
             ) {
                 MenuButton(stringResource(R.string.hot_drinks)) { onCategoryClick(Category.HOT_DRINKS) }
                 MenuButton(stringResource(R.string.salties)) { onCategoryClick(Category.SALTIES) }
-                MenuButton(stringResource(R.string.combos)) {
-                    Toast.makeText(context, R.string.coming_soon, Toast.LENGTH_SHORT).show()
-                }
+                MenuButton(stringResource(R.string.combos)) { onCombosClick() }
             }
             Column(
                 modifier = Modifier
@@ -98,9 +98,7 @@ fun MenuScreen(onCategoryClick: (Category) -> Unit, onCartClick: () -> Unit) {
             ) {
                 MenuButton(stringResource(R.string.cold_drinks)) { onCategoryClick(Category.COLD_DRINKS) }
                 MenuButton(stringResource(R.string.sweets)) { onCategoryClick(Category.SWEETS) }
-                MenuButton(stringResource(R.string.add_new_product)) {
-                    Toast.makeText(context, R.string.coming_soon, Toast.LENGTH_SHORT).show()
-                }
+                MenuButton(stringResource(R.string.add_new_product)) { onAddProductClick() }
             }
         }
     }
@@ -123,6 +121,6 @@ fun MenuButton(text: String, onClick: () -> Unit) {
 @Composable
 fun MenuPreview() {
     TheCheezeryTheme {
-        MenuScreen(onCategoryClick = {}, onCartClick = {})
+        MenuScreen(onCategoryClick = {}, onCombosClick = {}, onAddProductClick = {}, onCartClick = {})
     }
 }

@@ -13,6 +13,5 @@ class CheezeryApplication : Application() {
     val repository by lazy { CheezeryRepository(database) }
 }
 
-// para sacar el repositorio en las factories de los viewmodels
 val CreationExtras.cheezeryApplication: CheezeryApplication
     get() = checkNotNull(this[APPLICATION_KEY]) as CheezeryApplication
